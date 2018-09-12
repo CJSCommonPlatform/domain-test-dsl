@@ -32,6 +32,8 @@ public class DomainTestSteps {
         }
     }
 
+//    @When("^(?:I|you) (.*) (?:a|an) (.*) (?:by|with) (.*)$")
+
     @When("^(?:I|you) (.*) (?:to|from|on|in) (?:a|an) (.*) (?:using|with) (?:a|an) (.*)$")
     public void call_method_with_params(final String methodName, final String aggregateName, final String fileName)
             throws Exception {
@@ -44,6 +46,11 @@ public class DomainTestSteps {
         aggregateWrapper.initialiseFromClass(aggregateName).invokeMethod(methodName.trim());
     }
 
+    @Then("^no events occurred$")
+    public void assert_no_events_generated() {
+        assertThat(toJsonNodes(aggregateWrapper.generatedEvents()), hasNoEvents());
+    }
+
     private void assert_events_generated(final String fileNames) {
 
         final List<JsonNode> actual = toJsonNodes(aggregateWrapper.generatedEvents());
@@ -52,10 +59,5 @@ public class DomainTestSteps {
         assertThat(actual, hasEvents(expected));
 
         expected.forEach(jsonNode -> aggregateWrapper.generatedEvents().remove(0));
-    }
-
-    @Then("^no events occurred$")
-    public void assert_no_events_generated() {
-        assertThat(toJsonNodes(aggregateWrapper.generatedEvents()), hasNoEvents());
     }
 }

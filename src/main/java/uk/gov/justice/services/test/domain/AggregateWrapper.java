@@ -83,7 +83,7 @@ public class AggregateWrapper {
                 .collect(toList());
 
         if (methods.size() == 0) {
-            throw new IllegalArgumentException("No method found");
+            throw new IllegalArgumentException(format("No method found, class: %s, method: %s, params: %s", clazz.getName(), methodName, suppliedParamNames));
         } else if (methods.size() > 1) {
             throw new IllegalArgumentException("Too many matching methods found");
         }
