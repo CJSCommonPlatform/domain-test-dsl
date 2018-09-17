@@ -9,5 +9,5 @@ Feature: Cake
   Scenario: Use of 'a' and 'with' in When construction
 
     Given no previous events
-    When you markAsFailed a Cake with failed details
+    When you markAsFailed a Cake by failed details
     Then cake failed

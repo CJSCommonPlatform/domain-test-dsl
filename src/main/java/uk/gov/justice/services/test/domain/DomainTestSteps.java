@@ -32,7 +32,11 @@ public class DomainTestSteps {
         }
     }
 
-//    @When("^(?:I|you) (.*) (?:a|an) (.*) (?:by|with) (.*)$")
+    @When("^(?:I|you) (.*) (?:a|an) (.*) (?:by) (.*)$")
+    public void call_method_with_params_with_by_clause(final String methodName, final String aggregateName, final String fileName)
+            throws Exception {
+        call_method_with_params(methodName, aggregateName, fileName);
+    }
 
     @When("^(?:I|you) (.*) (?:to|from|on|in) (?:a|an) (.*) (?:using|with) (?:a|an) (.*)$")
     public void call_method_with_params(final String methodName, final String aggregateName, final String fileName)
